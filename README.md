@@ -1,2 +1,2 @@
 # laravel-mongodb
-Inspired by https://github.com/jenssegers/laravel-mongodb though this library is not yet complete.
+This library is not yet complete. Inspired by https://github.com/jenssegers/laravel-mongodb.
