@@ -1,5 +1,5 @@
 {
-    "name": "rocux/laravel-mongodb",
+    "name": "laravel-extended/mongodb",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -8,5 +8,26 @@
             "email": "rtocubillo@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^7.1.3",
+        "mongodb/mongodb": "^1.4",
+        "illuminate/database": "^5.8"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^8.1",
+        "symfony/var-dumper": "^4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Khronos\\MongoDB\\": "src/",
+            "Extendend\\MongoDB\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Extended\\MongoDB\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev"
 }
