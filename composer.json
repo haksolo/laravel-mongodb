@@ -1,0 +1,12 @@
+{
+    "name": "rocux/laravel-mongodb",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ronald Ocubillo",
+            "email": "rtocubillo@gmail.com"
+        }
+    ],
+    "require": {}
+}
