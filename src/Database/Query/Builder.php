@@ -834,4 +834,9 @@ class Builder
     {
         return (new AggregationBuilder($this->connection))->from($this->collection);
     }
+
+    public function toArray($columns = [])
+    {
+        return $this->toQueryOptions($columns);
+    }
 }
