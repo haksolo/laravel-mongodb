@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Aggregation\Stages;
+namespace Extended\MongoDB\Database\Aggregation\Stages;
 
-use Khronos\MongoDB\Database\Aggregation\FieldExpression;
+use Extended\MongoDB\Database\Aggregation\FieldExpression;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Project implements Arrayable

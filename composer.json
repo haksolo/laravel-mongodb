@@ -21,8 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Khronos\\MongoDB\\": "src/",
-            "Extendend\\MongoDB\\": "src/"
+            "Extended\\MongoDB\\": "src/"
         }
     },
     "autoload-dev": {

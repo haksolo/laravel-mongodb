@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Foundation\Http\Middleware;
+namespace Extended\MongoDB\Foundation\Http\Middleware;
 
 use Closure;
 use MongoDB\BSON\ObjectId;

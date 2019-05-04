@@ -4,7 +4,7 @@ namespace Extended\MongoDB\Tests;
 
 use Mockery;
 use PHPUnit\Framework\TestCase;
-use Khronos\MongoDB\Database\Connection;
+use Extended\MongoDB\Database\Connection;
 
 class DatabaseConnectionTest extends TestCase
 {

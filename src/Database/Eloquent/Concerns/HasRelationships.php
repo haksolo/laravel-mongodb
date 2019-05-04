@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Eloquent\Concerns;
+namespace Extended\MongoDB\Database\Eloquent\Concerns;
 
-use Khronos\MongoDB\Database\Eloquent\Relations\BelongsTo;
+use Extended\MongoDB\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 

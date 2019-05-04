@@ -5,11 +5,11 @@ namespace Extended\MongoDB\Test;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 // use PHPUnit\Framework\Error\Error;
-// use Khronos\MongoDB\Contracts\Database\LogicalOperator;
-use Khronos\MongoDB\Database\Query\FilterExpression;
-use Khronos\MongoDB\Database\Query\Operators\Eq;
-use Khronos\MongoDB\Database\Query\Operators\AndOperator;
-use Khronos\MongoDB\Contracts\Database\LogicalOperator;
+// use Extended\MongoDB\Contracts\Database\LogicalOperator;
+use Extended\MongoDB\Database\Query\FilterExpression;
+use Extended\MongoDB\Database\Query\Operators\Eq;
+use Extended\MongoDB\Database\Query\Operators\AndOperator;
+use Extended\MongoDB\Contracts\Database\LogicalOperator;
 
 class DatabaseQueryFilterExpressionTest extends TestCase
 {

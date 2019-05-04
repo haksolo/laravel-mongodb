@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Database;
+namespace Extended\MongoDB\Database;
 
 use InvalidArgumentException;
 use MongoDB\Client;

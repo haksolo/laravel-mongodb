@@ -1,9 +1,9 @@
 <?php
 
-namespace Khronos\MongoDB\Database;
+namespace Extended\MongoDB\Database;
 
 use Closure;
-use Khronos\MongoDB\Database\Query\Builder as QueryBuilder;
+use Extended\MongoDB\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Arr;
 use Illuminate\Database\ConnectionInterface;
 

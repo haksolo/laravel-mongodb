@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Support\Facades;
+namespace Extended\MongoDB\Support\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Queue;
+namespace Extended\MongoDB\Queue;
 
-use Khronos\MongoDB\Database\Eloquent\Model as BaseModel;
+use Extended\MongoDB\Database\Eloquent\Model as BaseModel;
 
 class Model extends BaseModel
 {

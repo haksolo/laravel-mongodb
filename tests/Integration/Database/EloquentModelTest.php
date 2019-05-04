@@ -3,8 +3,8 @@
 namespace Extended\MongoDB\Tests\Integration\Database;
 
 use Orchestra\Testbench\TestCase;
-use Khronos\MongoDB\Database\Eloquent\Model;
-use Khronos\MongoDB\Support\Facades\DB;
+use Extended\MongoDB\Database\Eloquent\Model;
+use Extended\MongoDB\Support\Facades\DB;
 
 class EloquentModelTest extends TestCase
 {
@@ -30,7 +30,7 @@ class EloquentModelTest extends TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Khronos\MongoDB\Database\DatabaseServiceProvider::class
+            \Extended\MongoDB\Database\DatabaseServiceProvider::class
         ];
     }
 
@@ -38,7 +38,6 @@ class EloquentModelTest extends TestCase
     {
         $book = Book::create(['title' => 'Laravel', 'description' => 'A PHP Framework']);
 
-        // dump($book->id);
         $this->assertEquals($book->getKey(), Book::first()->getKey());
         // $this->assertTrue($book->is(Book::first()));
     }

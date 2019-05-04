@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Contracts\Database;
+namespace Extended\MongoDB\Contracts\Database;
 
 interface LogicalOperator
 {

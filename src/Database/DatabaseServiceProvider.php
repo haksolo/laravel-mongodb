@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Database;
+namespace Extended\MongoDB\Database;
 
-use Khronos\MongoDB\Database\Eloquent\Model;
+use Extended\MongoDB\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class DatabaseServiceProvider extends ServiceProvider

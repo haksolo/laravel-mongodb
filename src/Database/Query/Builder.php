@@ -1,10 +1,10 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Query;
+namespace Extended\MongoDB\Database\Query;
 
 use Closure;
-use Khronos\MongoDB\Database\Aggregation\Builder as AggregationBuilder;
-use Khronos\MongoDB\Database\Query\Operators\AndOperator;
+use Extended\MongoDB\Database\Aggregation\Builder as AggregationBuilder;
+use Extended\MongoDB\Database\Query\Operators\AndOperator;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Concerns\BuildsQueries;
 

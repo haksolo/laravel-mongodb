@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\BSON;
+namespace Extended\MongoDB\BSON;
 
 class Document
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Eloquent;
+namespace Extended\MongoDB\Database\Eloquent;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 

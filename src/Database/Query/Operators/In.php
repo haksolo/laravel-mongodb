@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Query\Operators;
+namespace Extended\MongoDB\Database\Query\Operators;
 
-use Khronos\MongoDB\Database\Query\OperatorExpression;
+use Extended\MongoDB\Database\Query\OperatorExpression;
 
 class In extends OperatorExpression
 {

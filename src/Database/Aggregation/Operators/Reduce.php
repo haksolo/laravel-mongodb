@@ -1,9 +1,9 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Aggregation\Operators;
+namespace Extended\MongoDB\Database\Aggregation\Operators;
 
-use Khronos\MongoDB\Database\Aggregation\FieldExpression;
-use Khronos\MongoDB\Database\Aggregation\OperatorExpression;
+use Extended\MongoDB\Database\Aggregation\FieldExpression;
+use Extended\MongoDB\Database\Aggregation\OperatorExpression;
 
 class Reduce extends OperatorExpression
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Eloquent;
+namespace Extended\MongoDB\Database\Eloquent;
 
-use Khronos\MongoDB\Database\Aggregation\Builder as AggregationBuilder;
-use Khronos\MongoDB\Database\Query\Builder as QueryBuilder;
+use Extended\MongoDB\Database\Aggregation\Builder as AggregationBuilder;
+use Extended\MongoDB\Database\Query\Builder as QueryBuilder;
 
 trait ModelTrait
 {
@@ -74,7 +74,7 @@ trait ModelTrait
     /**
      * Get a new aggregation builder instance for the connection.
      *
-     * @return \Khronos\MongoDB\Aggregation\Builder
+     * @return \Extended\MongoDB\Aggregation\Builder
      */
     protected function newAggregationBuilder()
     {

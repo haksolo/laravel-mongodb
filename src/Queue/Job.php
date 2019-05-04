@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Queue;
+namespace Extended\MongoDB\Queue;
 
 use Illuminate\Container\Container;
 use Illuminate\Queue\Jobs\Job as BaseJob;
@@ -33,7 +33,7 @@ class Job extends BaseJob implements JobContract
      * Create a new job instance.
      *
      * @param  \Illuminate\Container\Container  $container
-     * @param  \Khronos\MongoDB\Queue\Queue  $database
+     * @param  \Extended\MongoDB\Queue\Queue  $database
      * @param  \stdClass  $job
      * @param  string  $connectionName
      * @param  string  $queue

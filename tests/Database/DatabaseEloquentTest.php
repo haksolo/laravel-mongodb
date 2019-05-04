@@ -4,10 +4,10 @@ namespace Extended\MongoDB\Tests;
 
 use Mockery;
 use PHPUnit\Framework\TestCase;
-use Khronos\MongoDB\Database\Connection;
-use Khronos\MongoDB\Database\Eloquent\Model;
-use Khronos\MongoDB\Database\Eloquent\Builder;
-use Khronos\MongoDB\Database\Query\Builder as QueryBuilder;
+use Extended\MongoDB\Database\Connection;
+use Extended\MongoDB\Database\Eloquent\Model;
+use Extended\MongoDB\Database\Eloquent\Builder;
+use Extended\MongoDB\Database\Query\Builder as QueryBuilder;
 
 class DatabaseEloquentTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Aggregation;
+namespace Extended\MongoDB\Database\Aggregation;
 
 use Illuminate\Support\Str;
 

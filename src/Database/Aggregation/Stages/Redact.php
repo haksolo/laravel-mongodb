@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Aggregation\Stages;
+namespace Extended\MongoDB\Database\Aggregation\Stages;
 
 use Illuminate\Contracts\Support\Arrayable;
 

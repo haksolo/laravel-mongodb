@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Eloquent\Relations;
+namespace Extended\MongoDB\Database\Eloquent\Relations;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo as BaseBelongsTo;

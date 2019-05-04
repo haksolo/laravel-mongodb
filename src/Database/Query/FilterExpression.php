@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Query;
+namespace Extended\MongoDB\Database\Query;
 
-use Khronos\MongoDB\Contracts\Database\LogicalOperator;
+use Extended\MongoDB\Contracts\Database\LogicalOperator;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Arrayable;
 

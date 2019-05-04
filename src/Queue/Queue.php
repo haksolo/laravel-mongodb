@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Queue;
+namespace Extended\MongoDB\Queue;
 
-use Khronos\MongoDB\Database\Connection;
+use Extended\MongoDB\Database\Connection;
 use Illuminate\Queue\Queue as BaseQueue;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 

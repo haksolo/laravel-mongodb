@@ -1,9 +1,9 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Aggregation\Stages;
+namespace Extended\MongoDB\Database\Aggregation\Stages;
 
-use Khronos\MongoDB\Database\Query\FilterExpression;
-use Khronos\MongoDB\Database\Query\Operators\AndOperator;
+use Extended\MongoDB\Database\Query\FilterExpression;
+use Extended\MongoDB\Database\Query\Operators\AndOperator;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Match implements Arrayable

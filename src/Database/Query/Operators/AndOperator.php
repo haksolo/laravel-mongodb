@@ -1,9 +1,9 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Query\Operators;
+namespace Extended\MongoDB\Database\Query\Operators;
 
-use Khronos\MongoDB\Database\Query\OperatorExpression;
-use Khronos\MongoDB\Contracts\Database\LogicalOperator;
+use Extended\MongoDB\Database\Query\OperatorExpression;
+use Extended\MongoDB\Contracts\Database\LogicalOperator;
 
 class AndOperator extends OperatorExpression implements LogicalOperator
 {

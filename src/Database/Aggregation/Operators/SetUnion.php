@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Aggregation\Operators;
+namespace Extended\MongoDB\Database\Aggregation\Operators;
 
-use Khronos\MongoDB\Database\Aggregation\OperatorExpression;
+use Extended\MongoDB\Database\Aggregation\OperatorExpression;
 
 class SetUnion extends OperatorExpression
 {

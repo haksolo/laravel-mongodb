@@ -1,6 +1,6 @@
 <?php
 
-namespace Khronos\MongoDB\Queue;
+namespace Extended\MongoDB\Queue;
 
 use Illuminate\Support\ServiceProvider;
 

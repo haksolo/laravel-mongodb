@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Database\Eloquent;
+namespace Extended\MongoDB\Database\Eloquent;
 
-use Khronos\MongoDB\Database\Query\Builder as QueryBuilder;
+use Extended\MongoDB\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Builder as BaseBuilder;
 
 class Builder extends BaseBuilder

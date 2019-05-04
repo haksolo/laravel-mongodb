@@ -4,8 +4,8 @@ namespace Extended\MongoDB\Tests;
 
 use Mockery;
 use PHPUnit\Framework\TestCase;
-use Khronos\MongoDB\Database\Connection;
-use Khronos\MongoDB\Database\Query\Builder;
+use Extended\MongoDB\Database\Connection;
+use Extended\MongoDB\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
 class DatabaseQueryBuilderTest extends TestCase

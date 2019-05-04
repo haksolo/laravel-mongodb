@@ -1,8 +1,8 @@
 <?php
 
-namespace Khronos\MongoDB\Foundation\Auth;
+namespace Extended\MongoDB\Foundation\Auth;
 
-use Khronos\MongoDB\Database\Eloquent\Model;
+use Extended\MongoDB\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 // use Illuminate\Foundation\Auth\User as Authenticatable;
