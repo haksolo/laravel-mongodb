@@ -75,7 +75,7 @@ class Builder
      *
      * @var int
      */
-    public $skip; // public $offset;
+    public $offset;
 
     // public $unions;
 
@@ -439,9 +439,7 @@ class Builder
      */
     public function skip($value)
     {
-        $this->skip = max(0, $value);
-
-        return $this;
+        return $this->offset($value);
     }
 
     /**
@@ -452,7 +450,9 @@ class Builder
      */
     public function offset($value)
     {
-        return $this->skip($value);
+        $this->offset = max(0, $value);
+
+        return $this;
     }
 
     /**
@@ -811,7 +811,7 @@ class Builder
         ], [
             'projection' => $this->columns($columns),
             'limit' => $this->limit,
-            'skip' => $this->skip,
+            'skip' => $this->offset,
             'sort' => $this->sort,
         ]];
     }
