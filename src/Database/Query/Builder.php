@@ -716,7 +716,12 @@ class Builder
         return $this->connection->delete($query, $options = []);
     }
 
-    // public function truncate()
+    public function truncate()
+    {
+        // $query = ['collection' => $this->collection];
+
+        $this->connection->truncate($this->collection);
+    }
 
     // public function newQuery()
 

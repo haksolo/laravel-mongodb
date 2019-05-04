@@ -292,4 +292,9 @@ class Connection implements ConnectionInterface
     {
         return Arr::get($this->config, 'name');
     }
+
+    public function truncate($collection)
+    {
+        return $this->client->selectCollection($this->database, $collection)->deleteMany([]);
+    }
 }
