@@ -61,4 +61,9 @@ class FilterExpression implements Arrayable
 
         return $this;
     }
+
+    public function operator()
+    {
+        return $this->operator;
+    }
 }
