@@ -11,7 +11,7 @@ use Illuminate\Database\Query\Builder as BaseBuilder;
 
 class Builder extends BaseBuilder
 {
-    protected $filter;
+    public $filter;
 
     public function __construct(Connection $connection)
     {
@@ -53,19 +53,7 @@ class Builder extends BaseBuilder
             // 'sort' => $this->sort,
         ]];
 
-        // dump($columns);
-        // dump($this->aggregate);
-        // dump($query['filter']);
-
-        return collect($this->connection->select(
-            $query,
-        ));
-
-        /*
-        return collect($this->onceWithColumns(Arr::wrap($columns), function () {
-            return $this->processor->processSelect($this, $this->runSelect());
-        }));
-        */
+        return collect($this->connection->select($query));
     }
 
     /**
@@ -79,23 +67,7 @@ class Builder extends BaseBuilder
     {
         $query = ['collection' => $this->from, 'document' => $values];
 
-        $result = $this->connection->insert($query);
-
-        return $result->getInsertedId();
-
-        /*
-        $sql = $this->grammar->compileInsertGetId($this, $values, $sequence);
-
-        $values = $this->cleanBindings($values);
-
-        return $this->processor->processInsertGetId($this, $sql, $values, $sequence);
-        */
-
-        /*
-        $query = ['collection' => $this->collection, 'document' => $values];
-
         return $this->connection->insert($query)->getInsertedId();
-        */
     }
 
     /**
@@ -106,13 +78,7 @@ class Builder extends BaseBuilder
      */
     public function count($columns = '*')
     {
-        return $this->aggregation()
-            // ->match([])
-            ->count('aggregate')
-            ->first()
-            ->aggregate;
-
-        // return $this->sum(1);
+        return (int) $this->sum(1);
     }
 
     /**
@@ -124,44 +90,16 @@ class Builder extends BaseBuilder
      */
     public function aggregate($function, $columns = ['*'])
     {
-        return null;
-
-        $result = $this->aggregation()
-            /*->group(['aggregate' => function ($query) use ($function, $columns) {
-
-            })*/
-            ->get()
-            ;
-
-        // dump($result);
-
-        /*
-        $result = $this->aggregation()
+        $results = $this->aggregation()
+            ->match(new FilterBuilder($this->filter))
             ->group(['aggregate' => function ($query) use ($function, $columns) {
                 return $query->select(current($columns))->{$function}();
-            }])->first();
-            */
-
-        /*
-        $this->cloneWithout($this->unions ? [] : ['columns'])
-            ->cloneWithoutBindings($this->unions ? [] : ['select'])
-            ->setAggregate($function, $columns)
-            ->get($columns)
-            ;
-        */
-
-        return 10;
-
-        /*
-        $results = $this->cloneWithout($this->unions ? [] : ['columns'])
-                        ->cloneWithoutBindings($this->unions ? [] : ['select'])
-                        ->setAggregate($function, $columns)
-                        ->get($columns);
+            }])
+            ->get();
 
         if (! $results->isEmpty()) {
-            return array_change_key_case((array) $results[0])['aggregate'];
+            return $results[0]->aggregate;
         }
-        */
     }
 
     /**
@@ -174,7 +112,7 @@ class Builder extends BaseBuilder
         $this->connection->truncate($this->from);
     }
 
-    protected function aggregation()
+    public function aggregation()
     {
         return (new AggregationBuilder($this->connection))->from($this->from);
     }

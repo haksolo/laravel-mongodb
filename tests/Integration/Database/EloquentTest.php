@@ -11,11 +11,9 @@ class EloquentTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
         // EloquentStub::create();
-
-        DB::insert(['collection' => 'books', 'document' => ['title' => 'Laravel']]);
-        DB::insert(['collection' => 'books', 'document' => ['title' => 'Laravel']]);
+        DB::insert(['collection' => 'books', 'document' => ['title' => 'Laravel', 'pages' => 100]]);
+        DB::insert(['collection' => 'books', 'document' => ['title' => 'Framework', 'pages' => 50]]);
     }
 
     protected function tearDown(): void
@@ -25,7 +23,7 @@ class EloquentTest extends TestCase
         parent::tearDown();
     }
 
-    public function testTest()
+    public function testIt()
     {
         $this->assertTrue(true);
 
@@ -49,13 +47,23 @@ class EloquentTest extends TestCase
             ->first();*/
 
         // dump($model);
-
-        // $this->markTestIncomplete('This test has not been implemented yet.');
     }
 
-    public function testCount()
+    public function testAggregateCount()
     {
         $this->assertEquals(2, EloquentStub::count());
+    }
+
+    public function testAggregateSum()
+    {
+        $this->assertEquals(150, EloquentStub::sum('pages'));
+        $this->assertEquals(50, EloquentStub::where('title', 'Framework')->sum('pages'));
+    }
+
+    public function testAggregateAvg()
+    {
+        $this->assertEquals(75, EloquentStub::avg('pages'));
+        $this->assertEquals(50, EloquentStub::where('title', 'Framework')->avg('pages'));
     }
 }
 
