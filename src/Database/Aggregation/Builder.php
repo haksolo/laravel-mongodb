@@ -68,16 +68,25 @@ class Builder
         throw new \Exception(sprintf('Invalid %s stage.', Str::studly($method)));
     }
 
-    /*public function dump($stages = [])
+    /**
+     * @codeCoverageIgnore
+     */
+    public function dump($stages = [])
     {
         return $this->debug(__FUNCTION__, $stages);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function dd($stages = [])
     {
         return $this->debug(__FUNCTION__, $stages);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function debug($function, $stages = [])
     {
         $function(array_filter($this->pipeline, function ($stage) use ($stages) {
@@ -85,5 +94,5 @@ class Builder
         }));
 
         return $this;
-    }*/
+    }
 }
