@@ -2,7 +2,7 @@
 
 namespace Extended\MongoDB\Database\Aggregation\Stages;
 
-use Extended\MongoDB\Database\Aggregation\FieldExpression;
+use Extended\MongoDB\Database\Aggregation\Expression\Field as FieldExpression;
 use Illuminate\Contracts\Support\Arrayable;
 
 class AddFields implements Arrayable
@@ -18,9 +18,14 @@ class AddFields implements Arrayable
     {
         $specifications = [];
         foreach ($this->specifications as $field => $specification) {
-            $specifications[$field] = (new FieldExpression($specification, $field))->toArray();
+            $specifications[$field] = $this->newFieldExpression($specification, $field)->toArray();;
         }
 
         return ['$addFields' => $specifications];
+    }
+
+    protected function newFieldExpression($expression, $field)
+    {
+        return new FieldExpression($expression, $field);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Extended\MongoDB\Database\Aggregation\Stages;
 
-use Extended\MongoDB\Database\Aggregation\FieldExpression;
+use Extended\MongoDB\Database\Aggregation\Expression\Field as FieldExpression;
 use Illuminate\Contracts\Support\Arrayable;
 
 class GraphLookup implements Arrayable
@@ -46,7 +46,7 @@ class GraphLookup implements Arrayable
     {
         return ['$graphLookup' => array_filter([
             'from' => $this->from,
-            'startWith' => (new FieldExpression($this->startWith, $this->connectToField))->toArray(),
+            'startWith' => $this->newFieldExpression($this->startWith, $this->connectToField)->toArray(),
             'connectFromField' => $this->connectFromField,
             'connectToField' => $this->connectToField,
             'as' => $this->as,
@@ -54,5 +54,10 @@ class GraphLookup implements Arrayable
             'depthField' => $this->depthField,
             'restrictSearchWithMatch' => $this->restrictSearchWithMatch,
         ])];
+    }
+
+    protected function newFieldExpression($expression, $field)
+    {
+        return new FieldExpression($expression, $field);
     }
 }

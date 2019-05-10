@@ -2,6 +2,7 @@
 
 namespace Extended\MongoDB\Database\Aggregation;
 
+use Extended\MongoDB\Database\Aggregation\Expression\Field as FieldExpression;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
@@ -13,16 +14,9 @@ class Expression implements Arrayable
         __call as macroCall;
     }
 
-    const DEFAULT_PREFIX = '$';
-
     protected $expression;
 
-    public static function factory(...$parameters)
-    {
-        return new static(...$parameters);
-    }
-
-    public function __construct($expression)
+    public function __construct($expression = null)
     {
         $this->expression = $expression;
     }
@@ -35,6 +29,11 @@ class Expression implements Arrayable
     public function toArray()
     {
         return $this->parse($this->expression());
+    }
+
+    protected function expression()
+    {
+        return $this->expression;
     }
 
     protected function parse($expression, $prop = null)
@@ -50,7 +49,8 @@ class Expression implements Arrayable
         }
 
         if ($expression instanceof FieldExpression) {
-            return (string) $expression;
+            // return (string) $expression;
+            return $expression->toValue();
         }
 
         if ($expression instanceof Arrayable) {
@@ -74,14 +74,22 @@ class Expression implements Arrayable
         return new FieldExpression(null, null);
     }
 
+
+
+    const DEFAULT_PREFIX = '$';
+
+    // protected static $operatorResolver;
+
+    protected static $namespace = __NAMESPACE__ . '\\Operators';
+
+    public static function factory(...$parameters)
+    {
+        return new static(...$parameters);
+    }
+
     protected function base()
     {
         return $this->expression();
-    }
-
-    protected function expression()
-    {
-        return $this->expression;
     }
 
     /**
@@ -97,7 +105,7 @@ class Expression implements Arrayable
             return $this->macroCall($method, $parameters);
         }
 
-        $operator = __NAMESPACE__.'\\Operators\\'.Str::studly($method);
+        $operator = static::$namespace.'\\'.Str::studly($method);
         if (class_exists($operator.'Operator')) {
             $operator .= 'Operator';
         }

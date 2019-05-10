@@ -1,10 +1,11 @@
 <?php
 
-namespace Extended\MongoDB\Database\Aggregation;
+namespace Extended\MongoDB\Database\Aggregation\Expression;
 
+use Extended\MongoDB\Database\Aggregation\Expression;
 use Illuminate\Support\Str;
 
-class OperatorExpression extends Expression
+class Operator extends Expression
 {
     protected $syntax;
 

@@ -80,9 +80,11 @@ class Connection implements ConnectionInterface
      */
     public function aggregate($query, $options = [], $useReadPdo = true)
     {
-        $collection = $this->client->selectCollection($this->database, $query['collection']);
+        return $this->collection($query['collection'])->aggregate($query['pipeline'], $query['options'] ?? []);
 
-        return $collection->aggregate($query['pipeline'], $this->options($options));
+        /*$collection = $this->client->selectCollection($this->database, $query['collection']);
+
+        return $collection->aggregate($query['pipeline'], $this->options($options));*/
     }
 
     /**
@@ -95,7 +97,7 @@ class Connection implements ConnectionInterface
      */
     public function selectOne($query, $options = [], $useReadPdo = true)
     {
-
+        return $this->collection($query['collection'])->findOne($query['filter']);
     }
 
     /**
@@ -108,11 +110,20 @@ class Connection implements ConnectionInterface
      */
     public function select($query, $options = [], $useReadPdo = true)
     {
+        return $this->collection($query['collection'])->find($query['filter'], $query['options'] ?? []);
+
+        /*
         $collection = $this->client->selectCollection($this->database, $query['collection']);
 
         return $collection->find($query['filter'], $this->options($options));
+        */
 
         // return $collection->{$bindings['method']}($query['filter'], $bindings['options']);
+    }
+
+    protected function collection($collection, $database = null)
+    {
+        return $this->client()->selectCollection($database ?: $this->database, $collection);
     }
 
     /**
@@ -135,11 +146,15 @@ class Connection implements ConnectionInterface
      * @param  array   $bindings
      * @return bool
      */
-    public function insert($query, $options = [])
+    public function insert($query, $bindings = [])
     {
+        return $this->collection($query['collection'])->insertOne($query['document']);
+
+        /*
         $collection = $this->client->selectCollection($this->database, $query['collection']);
 
         return $collection->insertOne($query['document'], $options);
+        */
     }
 
     /**
@@ -293,8 +308,19 @@ class Connection implements ConnectionInterface
         return Arr::get($this->config, 'name');
     }
 
+
+    public function client()
+    {
+        return $this->client;
+    }
+
     public function truncate($collection)
     {
-        return $this->client->selectCollection($this->database, $collection)->deleteMany([]);
+        return $this->collection($collection)->deleteMany([]);
     }
+
+    /*public function __call()
+    {
+
+    }*/
 }

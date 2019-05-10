@@ -2,8 +2,8 @@
 
 namespace Extended\MongoDB\Database\Aggregation\Operators;
 
-use Extended\MongoDB\Database\Aggregation\FieldExpression;
-use Extended\MongoDB\Database\Aggregation\OperatorExpression;
+use Extended\MongoDB\Database\Aggregation\Expression\Field as FieldExpression;
+use Extended\MongoDB\Database\Aggregation\Expression\Operator as OperatorExpression;
 
 class Reduce extends OperatorExpression
 {
@@ -24,7 +24,7 @@ class Reduce extends OperatorExpression
 
     public static function factory(...$parameters)
     {
-        [$input, $in, $initialValue] = array_pad($parameters, 2, []);
+        [$input, $in, $initialValue] = array_pad($parameters, 3, []);
 
         return new static($input, $initialValue, $in);
     }

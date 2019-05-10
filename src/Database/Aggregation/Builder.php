@@ -4,7 +4,7 @@ namespace Extended\MongoDB\Database\Aggregation;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
-use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\ConnectionInterface as Connection;
 
 class Builder
 {
@@ -14,7 +14,7 @@ class Builder
 
     protected $pipeline = [];
 
-    public function __construct(ConnectionInterface $connection)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
@@ -33,37 +33,42 @@ class Builder
 
     public function get()
     {
-        [$method, $query, $options] = $this->toQueryOptions();
+        $query = ['collection' => $this->collection, 'pipeline' => $this->getPipeline()];
 
-        return collect($this->connection->aggregate($query, $options));
+        return collect($this->connection->aggregate($query));
     }
 
-    public function pipeline($stage)
+    public function getPipeline()
+    {
+        return $this->pipeline;
+    }
+
+    public function addStage($stage)
     {
         $this->pipeline[] = $stage->toArray();
 
         return $this;
     }
 
-    public function toQueryOptions()
+    /*public function toQueryOptions()
     {
         return ['aggregate', [
             'collection' => $this->collection,
             'pipeline' => $this->pipeline], []
         ];
-    }
+    }*/
 
     public function __call($method, $parameters)
     {
         $stage = __NAMESPACE__.'\\Stages\\'.Str::studly($method);
         if (class_exists($stage)) {
-            return $this->pipeline(new $stage(...$parameters));
+            return $this->addStage(new $stage(...$parameters));
         }
 
         throw new \Exception(sprintf('Invalid %s stage.', Str::studly($method)));
     }
 
-    public function dump($stages = [])
+    /*public function dump($stages = [])
     {
         return $this->debug(__FUNCTION__, $stages);
     }
@@ -80,5 +85,5 @@ class Builder
         }));
 
         return $this;
-    }
+    }*/
 }

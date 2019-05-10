@@ -2,9 +2,10 @@
 
 namespace Extended\MongoDB\Database\Aggregation\Operators;
 
+use Closure;
 use ReflectionFunction;
-use Extended\MongoDB\Database\Aggregation\FieldExpression;
-use Extended\MongoDB\Database\Aggregation\OperatorExpression;
+use Extended\MongoDB\Database\Aggregation\Expression\Field as FieldExpression;
+use Extended\MongoDB\Database\Aggregation\Expression\Operator as OperatorExpression;
 
 class Filter extends OperatorExpression
 {
@@ -37,6 +38,10 @@ class Filter extends OperatorExpression
 
     protected function as()
     {
+        if (! $this->cond instanceof Closure) {
+            return $this->as;
+        }
+
         $reflection = new ReflectionFunction($this->cond);
         if (count($parameters = $reflection->getParameters())
             && $this->as = self::DEFAULT_AS_VALUE) {

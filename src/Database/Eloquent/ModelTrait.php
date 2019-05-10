@@ -80,4 +80,11 @@ trait ModelTrait
     {
         return (new AggregationBuilder($this->getConnection()))->from($this->getTable());
     }
+
+    /*
+    protected function newBelongsTo(Builder $query, Model $child, $foreignKey, $ownerKey, $relation)
+    {
+        return new BelongsTo($query, $child, $foreignKey, $ownerKey, $relation);
+    }
+    */
 }

@@ -1,7 +1,10 @@
 <?php
 
-namespace Extended\MongoDB\Database\Aggregation;
+namespace Extended\MongoDB\Support;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CustomExpression
 {
     public function then()
