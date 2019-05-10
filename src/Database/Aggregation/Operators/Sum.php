@@ -8,7 +8,7 @@ class Sum extends OperatorExpression
 {
     protected $expressions = [];
 
-    public function __construct(...$expressions)
+    public function __construct($expressions)
     {
         $this->expressions = $expressions;
     }

@@ -93,7 +93,7 @@ class DatabaseAggregationStagesTest extends TestCase
     public function testMatch()
     {
         $stage = new Stages\Match(['foo' => 'bar', 'bar' => 'baz']);
-        $this->assertEquals(['$match' => ['$and' => [['foo' => 'bar', 'bar' => 'baz']]]], $stage->toArray());
+        $this->assertEquals(['$match' => (object) ['foo' => 'bar', 'bar' => 'baz']], $stage->toArray());
     }
 
     public function testProject()

@@ -174,7 +174,7 @@ class DatabaseAggregationOperatorsTest extends TestCase
 
     public function testSum()
     {
-        $operator = new Operators\Sum(...[1, 2, 3, 4]);
+        $operator = new Operators\Sum([1, 2, 3, 4]);
         $this->assertEquals(['$sum' => [1, 2, 3, 4]], $operator->toArray());
     }
 

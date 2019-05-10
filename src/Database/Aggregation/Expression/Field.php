@@ -74,7 +74,7 @@ class Field extends Expression
 
     protected function base()
     {
-        return (string) $this;
+        return $this->toValue();
     }
 
     protected function parameters()
