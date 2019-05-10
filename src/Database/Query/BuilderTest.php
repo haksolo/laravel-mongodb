@@ -8,6 +8,9 @@ use Extended\MongoDB\Database\Query\Operators\AndOperator;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Concerns\BuildsQueries;
 
+/**
+ * @codeCoverageIgnore
+ */
 class BuilderTest
 {
     use BuildsQueries;

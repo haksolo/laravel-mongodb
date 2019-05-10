@@ -6,6 +6,9 @@ use Extended\MongoDB\Contracts\Database\LogicalOperator;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * @codeCoverageIgnore
+ */
 class FilterExpression implements Arrayable
 {
     protected $operator;

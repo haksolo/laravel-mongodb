@@ -6,6 +6,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * @codeCoverageIgnore
+ */
 class OperatorExpression implements Arrayable
 {
     const DEFAULT_PREFIX = '$';
