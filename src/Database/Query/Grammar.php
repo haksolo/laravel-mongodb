@@ -117,6 +117,22 @@ class Grammar extends BaseGrammar
     }
 
     /**
+     * Compile an update statement into SQL.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  array  $values
+     * @return string
+     */
+    public function compileUpdate(Builder $query, $values)
+    {
+        return [
+            'collection' => $query->from,
+            'filter' => $this->compileWheres($query),
+            'update' => ['$set' => $values]
+        ];
+    }
+
+    /**
      * Compile the "where" portions of the query.
      *
      * @param  \Illuminate\Database\Query\Builder  $query

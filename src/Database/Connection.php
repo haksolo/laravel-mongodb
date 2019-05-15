@@ -170,11 +170,10 @@ class Connection implements ConnectionInterface
      * @param  array   $bindings
      * @return int
      */
-    public function update($query, $options = [])
+    public function update($query, $bindings = [])
     {
-        $collection = $this->client->selectCollection($this->database, $query['collection']);
-
-        return $collection->updateOne($query['filter'], $query['update'], $options);
+        return $this->collection($query['collection'])
+            ->updateOne($query['filter'], $query['update'], $query['options'] ?? []);
     }
 
     /**
