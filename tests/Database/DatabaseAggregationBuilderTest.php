@@ -41,15 +41,15 @@ class DatabaseAggregationBuilderTest extends TestCase
     {
         $connection = Mockery::mock(Connection::class);
         $builder = $this->getBuilder($connection);
-        $this->assertIsArray($builder->getPipeline());
-        $this->assertCount(0, $builder->getPipeline());
+        $this->assertIsArray($builder->pipeline);
+        $this->assertCount(0, $builder->pipeline);
 
-        $builder->addStage($this->getMockStage(['foo']));
-        $this->assertCount(1, $builder->getPipeline());
-        $this->assertEquals([['foo']], $builder->getPipeline());
+        $builder->stage($this->getMockStage(['foo']));
+        $this->assertCount(1, $builder->pipeline);
+        $this->assertEquals([['foo']], $builder->pipeline);
 
-        $builder->addStage($this->getMockStage(['bar']));
-        $this->assertEquals([['foo'], ['bar']], $builder->getPipeline());
+        $builder->stage($this->getMockStage(['bar']));
+        $this->assertEquals([['foo'], ['bar']], $builder->pipeline);
     }
 
     public function testMagicMethodCallResolvesStage()
@@ -58,7 +58,7 @@ class DatabaseAggregationBuilderTest extends TestCase
         $builder = $this->getBuilder($connection);
 
         $builder->test(['foo', 'bar', 'baz']);
-        $this->assertCount(1, $pipeline = $builder->getPipeline());
+        $this->assertCount(1, $pipeline = $builder->pipeline);
         $this->assertEquals(['foo', 'bar', 'baz'], $pipeline[0]);
 
         $this->expectException(\Exception::class);

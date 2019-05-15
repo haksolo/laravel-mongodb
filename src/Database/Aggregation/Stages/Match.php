@@ -3,8 +3,6 @@
 namespace Extended\MongoDB\Database\Aggregation\Stages;
 
 use Extended\MongoDB\Database\Query\FilterBuilder;
-// use Extended\MongoDB\Database\Query\FilterExpression;
-// use Extended\MongoDB\Database\Query\Operators\AndOperator;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Match implements Arrayable
@@ -18,15 +16,6 @@ class Match implements Arrayable
 
     public function toArray()
     {
-        $expression = $this->query;
-        if ($expression instanceof FilterBuilder) {
-            $expression = $expression->toArray();
-        }
-
-        return ['$match' => (object) $expression];
-
-        // $query = new FilterExpression(new AndOperator(null, $this->query));
-
-        // return ['$match' => (object) $query->toArray()];
+        return ['$match' => (object) $this->query];
     }
 }

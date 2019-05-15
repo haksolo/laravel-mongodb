@@ -10,9 +10,9 @@ class Builder
 {
     protected $connection;
 
-    protected $collection;
+    public $collection;
 
-    protected $pipeline = [];
+    public $pipeline = [];
 
     public function __construct(Connection $connection)
     {
@@ -33,36 +33,23 @@ class Builder
 
     public function get()
     {
-        $query = ['collection' => $this->collection, 'pipeline' => $this->getPipeline()];
+        $query = ['collection' => $this->collection, 'pipeline' => $this->pipeline];
 
         return collect($this->connection->aggregate($query));
     }
 
-    public function getPipeline()
-    {
-        return $this->pipeline;
-    }
-
-    public function addStage($stage)
+    public function stage($stage)
     {
         $this->pipeline[] = $stage->toArray();
 
         return $this;
     }
 
-    /*public function toQueryOptions()
-    {
-        return ['aggregate', [
-            'collection' => $this->collection,
-            'pipeline' => $this->pipeline], []
-        ];
-    }*/
-
     public function __call($method, $parameters)
     {
         $stage = __NAMESPACE__.'\\Stages\\'.Str::studly($method);
         if (class_exists($stage)) {
-            return $this->addStage(new $stage(...$parameters));
+            return $this->stage(new $stage(...$parameters));
         }
 
         throw new \Exception(sprintf('Invalid %s stage.', Str::studly($method)));
@@ -73,7 +60,7 @@ class Builder
      */
     public function dump($stages = [])
     {
-        return $this->debug(__FUNCTION__, $stages);
+        $this->debug(__FUNCTION__, $stages);
     }
 
     /**
@@ -81,7 +68,7 @@ class Builder
      */
     public function dd($stages = [])
     {
-        return $this->debug(__FUNCTION__, $stages);
+        $this->debug(__FUNCTION__, $stages);
     }
 
     /**
@@ -89,10 +76,8 @@ class Builder
      */
     public function debug($function, $stages = [])
     {
-        $function(array_filter($this->pipeline, function ($stage) use ($stages) {
-            return $stages ? in_array(ltrim(key($stage), '$'), Arr::wrap($stages)) : true;
+        $function(array_filter($this->pipeline, function ($pipeline) use ($stages) {
+            return $stages ? in_array(ltrim(key($pipeline), '$'), Arr::wrap($stages)) : true;
         }));
-
-        return $this;
     }
 }

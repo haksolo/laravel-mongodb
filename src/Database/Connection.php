@@ -4,6 +4,8 @@ namespace Extended\MongoDB\Database;
 
 use Closure;
 use Extended\MongoDB\Database\Query\Builder as QueryBuilder;
+use Extended\MongoDB\Database\Query\Grammar;
+use Extended\MongoDB\Database\Query\Processor;
 use Illuminate\Support\Arr;
 use Illuminate\Database\ConnectionInterface;
 
@@ -78,7 +80,7 @@ class Connection implements ConnectionInterface
      * @param  bool  $useReadPdo
      * @return mixed
      */
-    public function aggregate($query, $options = [], $useReadPdo = true)
+    public function aggregate($query, $bindings = [], $useReadPdo = true)
     {
         return $this->collection($query['collection'])->aggregate($query['pipeline'], $query['options'] ?? []);
 
@@ -108,8 +110,12 @@ class Connection implements ConnectionInterface
      * @param  bool  $useReadPdo
      * @return array
      */
-    public function select($query, $options = [], $useReadPdo = true)
+    public function select($query, $bindings = [], $useReadPdo = true)
     {
+        if (isset($query['method']) && $query['method'] == 'aggregate') {
+            return $this->aggregate($query, $bindings, $useReadPdo);
+        }
+
         return $this->collection($query['collection'])->find($query['filter'], $query['options'] ?? []);
 
         /*
@@ -308,6 +314,15 @@ class Connection implements ConnectionInterface
         return Arr::get($this->config, 'name');
     }
 
+    public function getQueryGrammar()
+    {
+        return new Grammar;
+    }
+
+    public function getPostProcessor()
+    {
+        return new Processor;
+    }
 
     public function client()
     {

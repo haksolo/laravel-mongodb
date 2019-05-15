@@ -8,52 +8,19 @@ use Extended\MongoDB\Database\Aggregation\Builder as AggregationBuilder;
 use Illuminate\Database\ConnectionInterface as Connection;
 // use Illuminate\Database\Concerns\BuildsQueries;
 use Illuminate\Database\Query\Builder as BaseBuilder;
+use Illuminate\Support\Arr;
 
 class Builder extends BaseBuilder
 {
     public $filter;
 
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, Grammar $grammar = null, Processor $processor = null)
     {
         $this->connection = $connection;
-    }
 
-    /**
-     * Add a basic where clause to the query.
-     *
-     * @param  string|array|\Closure  $column
-     * @param  mixed   $operator
-     * @param  mixed   $value
-     * @param  string  $boolean
-     * @return $this
-     */
-    public function where($column, $operator = null, $value = null, $boolean = 'and')
-    {
-        $this->filter[] = func_get_args();
+        $this->grammar = $grammar ?: $connection->getQueryGrammar();
 
-        // return parent::where(...func_get_args());
-
-        return $this;
-    }
-
-    /**
-     * Execute the query as a "select" statement.
-     *
-     * @param  array|string  $columns
-     * @return \Illuminate\Support\Collection
-     */
-    public function get($columns = ['*'])
-    {
-        $filter = new FilterBuilder($this->filter);
-
-        $query = ['collection' => $this->from, 'filter' => $filter->toArray(), 'options' => [
-            // 'projection' => $this->columns($columns),
-            'limit' => $this->limit,
-            // 'skip' => $this->offset,
-            // 'sort' => $this->sort,
-        ]];
-
-        return collect($this->connection->select($query));
+        $this->processor = $processor ?: $connection->getPostProcessor();
     }
 
     /**
@@ -68,6 +35,14 @@ class Builder extends BaseBuilder
         $query = ['collection' => $this->from, 'document' => $values];
 
         return $this->connection->insert($query)->getInsertedId();
+
+        /*
+        $sql = $this->grammar->compileInsertGetId($this, $values, $sequence);
+
+        $values = $this->cleanBindings($values);
+
+        return $this->processor->processInsertGetId($this, $sql, $values, $sequence);
+        */
     }
 
     /**
@@ -82,24 +57,14 @@ class Builder extends BaseBuilder
     }
 
     /**
-     * Execute an aggregate function on the database.
+     * Run a pagination count query.
      *
-     * @param  string  $function
-     * @param  array   $columns
-     * @return mixed
+     * @param  array  $columns
+     * @return array
      */
-    public function aggregate($function, $columns = ['*'])
+    protected function runPaginationCountQuery($columns = ['*'])
     {
-        $results = $this->aggregation()
-            ->match(new FilterBuilder($this->filter))
-            ->group(['aggregate' => function ($query) use ($function, $columns) {
-                return $query->select(current($columns))->{$function}();
-            }])
-            ->get();
-
-        if (! $results->isEmpty()) {
-            return $results[0]->aggregate;
-        }
+        return [['aggregate' => $this->count($columns)]];
     }
 
     /**

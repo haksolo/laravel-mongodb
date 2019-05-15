@@ -18,7 +18,7 @@ class DatabaseEloquentTest extends TestCase
 
     public function testIfUsingQueryBuilder()
     {
-        $connection = Mockery::mock(Connection::class);
+        $connection = $this->getMockConnection();
         $model = Mockery::mock(Model::class.'[getConnection]');
         $model->shouldReceive('getConnection')->once()->andReturn($connection);
 
@@ -29,6 +29,18 @@ class DatabaseEloquentTest extends TestCase
     public function testQualifyColumnRemovesTablePrefix()
     {
         $this->assertEquals('column', (new EloquentModelStub)->qualifyColumn('column'));
+    }
+
+    protected function getMockConnection()
+    {
+        $grammar = Mockery::mock(stdClass::class);
+        $processor = Mockery::mock(stdClass::class);
+
+        $connection = Mockery::mock(Connection::class);
+        $connection->shouldReceive('getQueryGrammar')->once()->andReturn($grammar);
+        $connection->shouldReceive('getPostProcessor')->once()->andReturn($processor);
+
+        return $connection;
     }
 }
 
