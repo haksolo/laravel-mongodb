@@ -65,6 +65,11 @@ class Filter
         );
     }
 
+    protected function whereIn($where)
+    {
+        return $this->default($where['column'], '$in', $where['values']);
+    }
+
     protected function compareBoolean($boolean)
     {
         return $this->boolean !== $this->prefix($boolean);
@@ -102,8 +107,8 @@ class Filter
 
     /*
     protected function whereRaw(Builder $query, $where)
-    protected function whereBasic(Builder $query, $where)
-    protected function whereIn(Builder $query, $where)
+    #protected function whereBasic(Builder $query, $where)
+    #protected function whereIn(Builder $query, $where)
     protected function whereNotIn(Builder $query, $where)
     protected function whereNotInRaw(Builder $query, $where)
     protected function whereInRaw(Builder $query, $where)
@@ -115,8 +120,8 @@ class Filter
     protected function whereDay(Builder $query, $where)
     protected function whereMonth(Builder $query, $where)
     protected function whereYear(Builder $query, $where)
-    protected function whereColumn(Builder $query, $where)
-    protected function whereNested(Builder $query, $where)
+    #protected function whereColumn(Builder $query, $where)
+    #protected function whereNested(Builder $query, $where)
     protected function whereSub(Builder $query, $where)
     protected function whereExists(Builder $query, $where)
     protected function whereNotExists(Builder $query, $where)
